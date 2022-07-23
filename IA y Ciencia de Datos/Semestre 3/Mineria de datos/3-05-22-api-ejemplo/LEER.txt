@@ -1,0 +1,88 @@
+
+UNIDAD 3
+--------
+ACCESO A DATOS USANDO APIS
+•	Acceso a datos usandos APIS
+•	API, Rest y Rest Ful API
+•	Los verbos HTTP
+•	JSON, format de intercambio
+•	Consumir diferentes tipos de APIS
+•	APIS para practicar FrontEnd
+
+
+
+RECORDAR
+--------
+VERBOS HTTP
+JSON
+INSOMNIA, CHROME EXTENSION
+REPASO MANEJO DE DATOS
+CONSUMIR APIS
+
+
+LINKS
+-----
+https://www.w3schools.com/
+https://www.mockaroo.com/
+https://jsonlint.com/
+https://www.postman.com/
+https://insomnia.rest/
+https://www.youtube.com/playlist?list=PLqQuBtnWHEoJj_G8ClEOKabYSsoNPK_q_
+
+
+AYUDA
+-----
+def leerTxt1():
+    with open('data/datos1.txt', 'r') as archivo:
+        lineas = archivo.readlines()
+        print(lineas)
+
+def leerTxt2():
+    with open('data/datos1.txt', 'r') as archivo:
+        lineas = archivo.readlines()
+        for linea in lineas:
+            print(linea)
+
+def leerTxt3():
+    with open('data/datos1.txt', 'r') as archivo:
+        lineas = archivo.read()
+        print(lineas)
+
+def grabarTxt1():
+    with open('data/datos2.txt', 'w') as archivo:
+        archivo.write('HOLA')
+        archivo.write('\n')
+        archivo.write('CHAU')
+        archivo.write('\n')
+
+def grabarTxt2():
+    frutas = [
+        "NARANJA",
+        "PERA",
+        "ANANA",
+        "MANZANA"
+    ]
+    with open('data/datos2.txt', 'w') as archivo:
+        for fruta in frutas:
+            archivo.write(fruta + '\n')
+
+def leerJSON1():
+  with open('data/datos1.json', 'r') as archivo:
+        contenido = archivo.read()
+        filas = json.loads(contenido)
+        for fila in filas:
+            print('cliente: {} - nombre: {}'.format(fila['cliente'], fila['nombre']))
+
+def consumirAPI1():
+    URL = 'https://jsonplaceholder.typicode.com/users'
+    response = requests.get(URL)
+    filas = response.json()
+    for fila in filas:
+        print('id: {} - name: {}'.format(fila['id'], fila['name']))
+
+def consumirAPI2():
+    URL = 'https://api.mercadolibre.com/classified_locations/countries'
+    response = requests.get(URL)
+    filas = response.json()
+    for fila in filas:
+        print('id: {} - name: {}'.format(fila['id'], fila['name']))

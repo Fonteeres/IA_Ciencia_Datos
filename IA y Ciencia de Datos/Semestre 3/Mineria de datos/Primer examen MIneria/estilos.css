@@ -1,0 +1,22 @@
+body{
+    background-color: gray;
+}
+#titulo {
+    text-align: center;
+}
+
+.celeste {
+    height: 150px;
+    border: 1px solid black;
+    background-color: lightblue;
+}
+#Sol {
+    height: 150px;
+    margin-left: 550px;
+}
+.blanco {
+    height: 150px;
+    border: 1px solid black;
+    background-color: white;
+}
+

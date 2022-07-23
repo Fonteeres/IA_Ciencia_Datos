@@ -1,0 +1,8 @@
+[
+	{"nombre": "ANA", "puntaje": [95, 45]},
+	{"nombre": "PEDRO", "puntaje": [40, 60]},
+	{"nombre": "LUISA", "puntaje": [80, 70]},
+	{"nombre": "JULIO", "puntaje": [60, 80]},
+	{"nombre": "ROSA", "puntaje": [100, 70]}
+
+]

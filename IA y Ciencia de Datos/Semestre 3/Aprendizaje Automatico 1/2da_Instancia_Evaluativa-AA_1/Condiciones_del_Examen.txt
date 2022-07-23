@@ -1,0 +1,49 @@
+Consigna
+Pudimos comprender de que manera colabora la INGENIERIA DE VARIABLES y los HIPERPARÁMETROS con el resultado de las predicciones.
+En la ultima clase tomamos contacto con diferentes procesos realizados con el set de variables y comprendimos que, solamente,
+con: eliminar variables, completar datos faltantes, normalizando o construyendo variables nuevas, las predicciones mejotan. Lo
+mismo sucede con los HIPERPARÄMETROS utilizados en cada modelo.
+Parte de la base de los Jupiter incuidos en la carpeta Material_Guía y mejore el resultado del 88% de accuracy obtenido, solamente 
+realizando INGENIERIA DE VARIABLES e HIPERPARAMETRIZANDO los modelos ya utilizados.
+Tiene a disposicion para la INGENIEDIA DE VARIABLES, herramientas como: NUMPY, PANDAS, PYTHON, ONE HOT ENCODER, ORDINAL ENCODER
+o todas aquellas que considere que le puede ser de utilidad.
+Al momdento de buscar los mejores HIPERPARÄMETROS recuerde que el sobrecargar de estos a los Modelos puede llevar a que su equipo 
+no sea suficiente para obtener los resultados, a que demore demasiado tiempo en el proceso u otras cuestiones que afectarán el 
+desarrrolo de este examen. Sean conscientes: analicen 1ero lo que quieren hacer y luego vayan haciendo pruebas parciales y ajustando 
+lo que crean necesario
+Por ultimo, luego de encontrar el MEJOR MODELO, ponga ese modelo en produccion con el MEJOR SET DE DATOS Y LOS MEJORES HIPERPARÁMETROS.
+
+ACLARACIÓN: el 88% de accuracy se logro con los set de datos de VALIDACIÓN y se espera que las mejoras que obtengan tambien sean tambien
+en VALIDACIÓN (duramte la búsqueda del mejor modelo).
+Recuerde comentar el paso a paso y cada idea que este poniendo en evaluación. Los porque en este momento son de suma importancia.
+Tambien es de suma importancia que a los valores no los agrege manualmente en una celda MARKDOWN sino que sean el resultado de un código 
+que pueda ejecutarse y confirmar el resultado al que llegó.
+No deje errores en el examen. Investigue y resuelvalos o descarte ese código.
+Finalmente, no olvide correr el código desde el principio antes de entregar el examen. Recuerde que muchas cosas quedan guardadas en memoria
+y si modifica códigos en partes previasdel examen, pueden darle resultados engañosos.
+
+FECHA LÍMITE DE ENTREGA: Martes 21/06/2022
+
+
+Condiciones
+
+- Completen el WORD nombrado como AA_I(2IE).doc con sus datos, realicen ambas partes en los Jupyter, hagan un ZIP con todo
+y gusrdenlo en el DRIVE en la cartpeta llamada EXAMENES_ALUMNOS situada dentro de la carpeta 2da_Instancia_Evaluativa-AA_1
+
+- Utilicen todas las herramientas a disposición para resolverlo, excepto el trabajo en equipo. El parcial es individual.
+Les sugiero recurrir a la documentación oficial de las librerias como fuimos haciendolo en clases.
+
+- Liberense en sus criterios. No hay respuestas correctas o incorrectas sino ideas que son justificados o no mediante
+las heramientas que utilice, cual es la mirada que le de al desarrolo y la solución que pretenda darle al problema.
+
+- Cónsulte pero no se deje convencer. La creatividad es una habilidad que en nuestro mundo es sumamente valorada y es SUYA.
+Defienda su postura y llegue a sus propias conclusiones.
+
+- Tienen hasta el miercoles 18/05/2022 para entregar sus practicos pendientes (si no los realizó, busquelos al final de cada
+teórico en los Jupyter de las clases en el Drive) y su Parcial tanto Teórico como Práctico.
+
+- Dejense llevar, disfrutenlo y descubran. Si se liberan van a encontrar que a los limites se los ponen uds mismos.
+
+EXITOOOOSSSSSS!!!!
+
+El Lucho

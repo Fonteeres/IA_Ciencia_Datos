@@ -1,0 +1,8 @@
+nombre,edad,sexo_femenino,sexo_masculino,fruta_manzana,fruta_naranja,fruta_pera
+Ana,25,1,0,0,0,1
+Pedro,37,0,1,1,0,0
+Juana,19,1,0,0,1,0
+Estela,22,1,0,0,0,1
+Luis,34,0,1,1,0,0
+Julieta,41,1,0,0,1,0
+Mario,52,0,1,0,1,0

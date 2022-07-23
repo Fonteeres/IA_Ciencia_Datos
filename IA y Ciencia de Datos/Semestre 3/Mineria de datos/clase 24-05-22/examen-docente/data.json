@@ -1,0 +1,19 @@
+[
+{"linea": 1, "contenido": "CUIT 20-12345678-1 ANA" },
+{"linea": 2, "contenido": "CUIT 21-23456789-2 CARLOS" },
+{"linea": 3, "contenido": "CUIT 30-11223344-7 SILVIA" },
+{"linea": 4, "contenido": "CUIT 30-112233445-71 ROSARIO" },
+{"linea": 5, "contenido": "CUIT 20-6112233445-7 GUSTAVO" },
+{"linea": 6, "contenido": "CUIT PEDRO 20-12345678-1" },
+{"linea": 7, "contenido": "CUIT ESTELA 30-12345678-1" },
+{"linea": 8, "contenido": "CUIT ROXANA 31-12345678-1" },
+{"linea": 9, "contenido": "220-22334455-2 CUIT DE LORENZO" },
+{"linea":10, "contenido": "20-88334455-2 CUIT DE ROBERTO" },
+{"linea":11, "contenido": "30-88334466-2 CUIT DE SARA" },
+{"linea":12, "contenido": "30-883134466-2 CUIT DE MARIO" },
+{"linea":13, "contenido": "20-88334466-29 CUIT DE SAMUEL" },
+{"linea":14, "contenido": "CUIT ROLANDO 20-12345678-17" },
+{"linea":15, "contenido": "CUIT FRANCISCO 30-912345678-1" },
+{"linea":16, "contenido": "CUIT IGNACIO 930-12345678-1" },
+{"linea":17, "contenido": "CUIT JULIETA 20-1122334-1" }
+]

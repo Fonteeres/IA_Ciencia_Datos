@@ -1,0 +1,31 @@
+body {
+	margin: 75px;
+	background: #A9A9A9;
+}
+
+#cabecera {
+	padding: 30px;
+	background: #0000AA;
+	color: #FFFFFF;
+	text-align: center
+}
+
+#contenido {
+	padding: 30px;
+	background: #0000FF;
+	color: #FFFFFF;
+
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+  	width: 60%;
+  	margin: 0 auto;
+}
+
+td, th {
+  	border: 1px solid #dddddd;
+  	text-align: left;
+  	padding: 10px;
+}
