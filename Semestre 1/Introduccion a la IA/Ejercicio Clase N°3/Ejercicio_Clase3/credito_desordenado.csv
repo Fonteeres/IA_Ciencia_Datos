@@ -1,0 +1,14 @@
+Tiene_Deuda;Genero;Trabaja;Propietario;Dar_Credito
+Si;F;No;Si;No
+Si;M;No;Si;No
+No;F;Si;Si;Si
+No;F;Si;No;Si
+No;F;No;No;No
+No;M;Si;No;No
+No;M;No;Si;No
+No;M;No;No;No
+Si;F;No;No;No
+Si;M;Si;No;No
+Si;M;No;No;No
+No;F;No;Si;No
+No;M;Si;Si;Si

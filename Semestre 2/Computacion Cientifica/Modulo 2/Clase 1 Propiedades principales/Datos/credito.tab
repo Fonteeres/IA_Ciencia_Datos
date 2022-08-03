@@ -1,0 +1,14 @@
+	Tiene_Deuda	Genero	Trabaja	Propietario	Dar_Credito
+0	Si	F	No	Si	No
+1	Si	M	No	Si	No
+2	No	F	Si	Si	Si
+3	No	F	Si	No	Si
+4	No	F	No	No	No
+5	No	M	Si	No	No
+6	No	M	No	Si	No
+7	No	M	No	No	No
+8	Si	F	No	No	No
+9	Si	M	Si	No	No
+10	Si	M	No	No	No
+11	No	F	No	Si	No
+12	No	M	Si	Si	Si
