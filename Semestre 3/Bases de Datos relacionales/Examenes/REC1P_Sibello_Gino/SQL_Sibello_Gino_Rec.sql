@@ -13,7 +13,7 @@ from mayorcab mc
 	inner join marcas m on (m.marca = a.marca)
 where
 	m.marca = 'G' 
-	and mc.fecha between '01/01/2008' and '31/03/2008'
+	and mc.fecha between '2008/01/01' and '2008/03/31'
 	and mc.anulada = 0
 order by
 	3,4
@@ -22,7 +22,7 @@ order by
 select
 	s.denominacion,
 	count(vc.factura) as 'CANTIDAD DE VENTAS',
-	sum(vc.total) as 'IMPORT DE VENTAS',
+	sum(vc.total) as 'IMPORTE DE VENTAS',
 	sum(vc.total*0.03) as 'PREMIO'
 From vencab vc
 	inner join sucursales s on (s.sucursal = vc.sucursal)

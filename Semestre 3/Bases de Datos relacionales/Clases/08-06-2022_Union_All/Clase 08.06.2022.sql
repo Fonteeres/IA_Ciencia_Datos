@@ -194,57 +194,6 @@ de 1000 prendas y gastaron mas de 50000 pesos en el primer semestre de 2006. Exc
 TABLAS: CLIENTES (cliente), MAYORCAB (cliente) (letra y factura), MAYORDET (letra y factura)
 
 */
-select * from mayordet
-select * from mayorcab
-select * from clientes
-
-SELECT --TOP 50 
-	c.nombre,
-	sum(md.precioreal * md.cantidad) as 'Precio Total',
-	sum(md.cantidad) as 'Cantidad de prendas'
-FROM mayorcab as mc
-inner join clientes as c on mc.cliente = c.cliente
-inner join mayordet as md on (md.factura = mc.factura and md.letra = mc.letra)
-where
-	anulada = 0 
-	and mc.fecha between '01/01/2006' and '30/06/2006'
-group by
-	c.nombre
-Having
-	sum(md.cantidad) > 1000
-	and sum(md.precioreal * md.cantidad) > 50000
-order by
-	3 DESC
-
--- DML: SELECT, INSERT; UPDATE, DELETE
--- DDL: CREATE, DROP, ALTER
--- DDL: TABLE, PROCEDURE, FUNCTION, INDEX, TRIGGER, VIEW
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 SELECT TOP 50
 	c.nombre AS "Cliente",
