@@ -12,7 +12,18 @@ Presentar las columnas ARTICULO, NOMBRE, PRECIOMENOR y ESTADO. Ordenar por la co
 TABLAS: articulos (EL RESULTADO DEBE ARROJAR 31 FILAS)
 
 */
-
+SELECT 
+	articulo,
+	nombre,
+	preciomenor,
+	estado
+FROM articulos
+WHERE
+	preciomenor between 5.00 and 30.00
+	and articulo like 'K%'
+	and nombre like '%REMERA%'
+ORDER BY
+	2
 
 
 /*
@@ -26,9 +37,18 @@ Excluir las ventas anuladas. Mostrar las columnas MES, FACTURAS, IMPORTE. Ordena
 TABLAS: mayorcab (EL RESULTADO DEBE ARROJAR 12 FILAS)
 
 */
-
-
-
+SELECT 
+	MONTH(fecha) as 'MES',
+	count(factura) as 'CANTIDAD FACTURAS',
+	sum(total) as 'IMPORTE TOTAL'
+FROM mayorcab
+where
+	anulada = 0
+	and year(fecha) = 2007
+group by
+	MONTH(fecha)
+order by
+	1
 /*
 
 3. RECUPERACIÓN DE DATOS CON SUBCONSULTA
@@ -40,9 +60,17 @@ Mostrar las columnas VENDEDOR (código), NOMBRE, ENCARGADO y ACTIVO. Ordenar por 
 TABLAS: vencab (suconsulta), vendedores (consulta principal) (EL RESULTADO DEBE RETORNAR 68 FILAS)
 
 */
-
-
-
+SELECT 
+	vendedor,
+	nombre,
+	encargado,
+	activo
+FROM vendedores
+WHERE
+	activo = 'S'
+	and vendedor not in (SELECT distinct vendedor FROM vencab WHERE fecha between '2006/04/01' and '2006/06/30')
+ORDER BY 
+	1
 /*
 
 4. RECUPERACIÓN DE DATOS CON UNION
@@ -60,8 +88,27 @@ Ordenar por la primer columna "Factura".
 TABLAS: vencab (consulta 1), mayorcab (consulta 2) (EL RESULTADO DEBE RETORNAR 10738 FILAS)
 
 */
+SELECT
+	letra +  Rtrim(str(factura)) as 'FACTURA',
+	'Min' as 'Tipo Venta'
+FROM vencab
+WHERE 
+	anulada = 0
+	and year(fecha) = 2006
+	and MONTH(fecha) = 5
 
+UNION
 
+SELECT 
+	letra + trim(str(factura)) as 'FACTURA',
+	'MAY' as 'Tipo Venta'
+FROM mayorcab
+where
+	anulada = 0
+	and year(fecha) = 2006
+	and MONTH(fecha) = 5
+order by 
+	1
 
 /*
 
@@ -79,9 +126,19 @@ Ordene por el nombre del cliente, y luego por el número de factura. Excluya vent
 TABLAS: clientes, mayorcab (EL RESULTADO DEBE RETORNAR 5327 FILAS)
 
 */
-
-
-
+SELECT 
+	c.cliente,
+	c.cp,
+	mc.letra,
+	mc.factura,
+	mc.fecha,
+	mc.total
+FROM clientes c
+	inner join mayorcab mc on (c.cliente = mc.cliente)
+WHERE
+	c.cp between '5000' and '5999'
+	and year(mc.fecha) = 2007
+	and mc.anulada = 0
 /*
 
 6. RECUPERACIÓN DE DATOS DE VARIAS TABLAS CON AGRUPAMIENTO
@@ -95,9 +152,22 @@ Ordene en forma DESCENDENTE por el IMPORTE TOTAL.
 TABLAS: clientes, mayorcab (EL RESULTADO DEBE RETORNAR 142 FILAS)
 
 */
-
-
-
+SELECT 
+	c.nombre,
+	c.cp,
+	count(mc.factura) as 'CANTIDAD DE FACTURAS',
+	SUM(mc.total) as 'IMPORTE TOTAL'
+FROM clientes c
+	inner join mayorcab mc on (c.cliente = mc.cliente)
+WHERE
+	c.cp between '5000' and '5999'
+	and year(mc.fecha) = 2007
+	and mc.anulada = 0
+GROUP BY
+	c.nombre,
+	c.cp
+order by
+	4 desc
 /*
 
 7. RECUPERACIÓN DE DATOS DE VARIAS TABLAS CON SUBCONSULTA Y AGRUPAMIENTO
@@ -111,9 +181,24 @@ Mostrar VENDEDOR, NOMBRE, ENCARGADO (S o N), IMPORTE TOTAL. Ordene el resultado 
 TABLAS: vencab y vendedores (consulta principal), vencab (subconsulta). EL RESULTADO DEBE RETORNAR 4 FILAS.
 
 */
-
-
-
+SELECT 
+	v.vendedor,
+	v.nombre,
+	v.encargado,
+	Sum(vc.total) as 'IMPORTE TOTAL'
+FROM vencab vc
+	INNER JOIN vendedores v on (vc.vendedor = v.vendedor)
+where 
+	vc.anulada = 0
+	and year(vc.fecha) = 2006
+GROUP BY
+	v.vendedor,
+	v.nombre,
+	v.encargado
+HAVING
+ Sum(vc.total) > (select sum(total) from vencab where vendedor = 144 and year(fecha) = 2005)
+order by
+	4 desc
 /*
 
 8. INSERCIÓN SIMPLE
@@ -126,9 +211,17 @@ darla de alta en la tabla VENDEDORES, teniendo en cuenta:
 	- El nuevo vendedor deberá estar ACTIVO (activo = 'S'), y será ENCARGADO (encargado = 'S').
 
 */
+SELECT * FROM vendedores
+SELECT max(vendedor) + 1 FROM vendedores
+SELECT sucursal FROM sucursales where denominacion = 'VILLA CABRERA'
+SELECT GETDATE ()
 
+INSERT INTO vendedores
+	(vendedor,nombre,sucursal,dni,ingreso,encargado,activo)
+VALUES
+	(1052,'LASPINA MARCELA',5,30401211,getdate(),'S','S')
 
-
+SELECT * FROM vendedores where vendedor = 1052
 /*
 
 9. INSERCIÓN MASIVA CON CREACIÓN DE TABLA
@@ -146,9 +239,22 @@ TABLAS: rubros, vencab, vendet, articulos (para el SELECT CON AGRUPAMIENTO).
 LA NUEVA TABLA DEBERÁ TENER 7 FILAS, UNA POR RUBRO (el rubro 72 no tuvo ventas).
 
 */
+SELECT 
+	r.rubro,
+	r.nombre,
+	sum(vt.precio*vt.cantidad) as 'TOTAL_VENTAS'
+INTO TmpVentasAccesorios
+FROM vendet vt
+	inner join vencab vc on(vc.factura = vt.factura and vc.letra = vt.letra)
+	inner join articulos a on (vt.articulo = a.articulo)
+	inner join rubros r on (a.rubro = r.rubro)
+WHERE 
+	r.rubro in (76, 85, 77, 97, 70, 72, 87, 88)
+GROUP BY
+	r.rubro,
+	r.nombre
 
-
-
+SELECT * FROM TmpVentasAccesorios
 /*
 
 10. INSERCIÓN MASIVA A TABLA EXISTENTE
@@ -162,9 +268,21 @@ TABLAS: rubros, vencab, vendet, articulos (para el SELECT).
 SE DEBERÁN INSERTAR 2 FILAS EN LA TABLA.
 
 */
-
-
-
+INSERT INTO TmpVentasAccesorios
+SELECT 
+	r.rubro,
+	r.nombre,
+	sum(vt.precio*vt.cantidad) as 'TOTAL_VENTAS'
+FROM vendet vt
+	inner join vencab vc on(vc.factura = vt.factura and vc.letra = vt.letra)
+	inner join articulos a on (vt.articulo = a.articulo)
+	inner join rubros r on (a.rubro = r.rubro)
+WHERE 
+	r.rubro in (89,99)
+GROUP BY
+	r.rubro,
+	r.nombre
+SELECT * FROM TmpVentasAccesorios
 /*
 
 11. ACTUALIZACIÓN MASIVA DE FILAS
@@ -175,8 +293,10 @@ sucursales que NO estén activas (Activa = 'N').
 SE DEBEN ACTUALIZAR 4 FILAS DE LA TABLA SUCURSAL.
 
 */
-
-
+UPDATE sucursales
+SET terminalposnet = 0, centrocosto = 0
+WHERE 
+	Activa = 'N'
 
 /*
 
@@ -188,7 +308,15 @@ rubros que NO superaron los 20.000 en el total de ventas.
 SE DEBEN ELIMINAR 4 FILAS DE LA TABLA.
 
 */
+DELETE FROM TmpVentasAccesorios 
+WHERE TOTAL_VENTAS <= 20000
 
+--BORRE TODO DE LA TABLA
+TRUNCATE TABLE TmpVentasAccesorios
+--ESTE TAMBINE LO HACE
+DELETE TmpVentasAccesorios
+--BORRE LA TALBA
+DROP TABLE TmpVentasAccesorios
 
 
 /*
@@ -201,7 +329,12 @@ Verifique si quedó vacía (con 0 filas) y en caso afirmativo haga ROLLBACK para v
 
 */
 
-
+BEGIN TRANSACTION 
+	DELETE gastos 
+		if EXISTS(select * from gastos)
+			COMMIT TRANSACTION
+		ELSE 
+			ROLLBACK TRANSACTION 
 
 /*
 
@@ -215,9 +348,21 @@ Debe mostrar el mensaje "Existen [cantidad] artículos de la marca [código]."
 Ejecute el procedimiento con la marca 'B' para probar. DEBE RETORNAR EL MENSAJE: Existen 1510 artículos de la marca B.
 
 */
+SELECT * FROM articulos
+ALTER PROCEDURE sp_articulos_marca
+	@marca char(1)
+AS
+DECLARE 
+	@c int
+BEGIN
+	SELECT @c = COUNT(*) 
+	FROM articulos
+	where marca = @marca
 
+	PRINT 'Existen ' + trim(str(@c)) +' articulos de la marca ' + @marca
+END
 
-
+EXEC sp_articulos_marca 'B'
 /*
 
 15. PROCEDIMIENTO ALMACENADO CON MANEJO DE ERRORES
@@ -237,9 +382,39 @@ Se deberá validar la ocurrencia de errores, mostrando los siguientes mensajes:
 Realice dos ejecuciones de prueba, una con un rubro nuevo, y otra con un rubro existente.
 
 */
-
-
-
+ALTER PROCEDURE sp_inserta_rubro
+	@codigo int,
+	@nombre char(30)
+AS
+DECLARE
+	@e int
+BEGIN
+	BEGIN TRANSACTION 
+			INSERT INTO rubros
+				(rubro,nombre)
+			VALUES
+				(@codigo,@nombre)
+	SET @e = @@ERROR
+		IF @e = 0
+			BEGIN 
+				COMMIT TRANSACTION
+				PRINT 'El rubro ' + TRIM(@nombre) + ' se insertó correctamente.'
+			END
+		ELSE
+			BEGIN
+				ROLLBACK TRANSACTION
+				IF @e = 2627
+				PRINT 'El rubro ' + TRIM(STR(@codigo)) + ' ya existe en la tabla.'
+			ELSE
+				PRINT 'Se produjo un error durante la inserción.'
+		END
+END
+--
+select max(rubro) FROM rubros
+--
+EXEC sp_inserta_rubro 100, 'PERRO'
+--
+DELETE rubros FROM rubros where rubro = 100
 /*
 
 16. PROCEDIMIENTO ALMACENADO CON USO DE TRY / CATCH
@@ -250,3 +425,33 @@ los bloques TRY y CATCH.
 Realice dos ejecuciones de prueba, una con un rubro nuevo, y otra con un rubro existente.
 
 */
+
+ALTER PROCEDURE sp_inserta_rubro
+	@codigo int,
+	@nombre char(30)
+AS
+
+BEGIN TRY
+	BEGIN TRANSACTION
+		INSERT INTO rubros
+			(rubro,nombre)
+		VALUES
+			(@codigo,@nombre)
+	COMMIT TRANSACTION
+	PRINT 'El rubro ' + TRIM(@nombre) + ' se insertó correctamente.'
+END TRY
+
+BEGIN CATCH 
+	ROLLBACK TRANSACTION 
+	IF ERROR_NUMBER() = 2627
+		PRINT 'El rubro ' + TRIM(STR(@codigo)) + ' ya existe en la tabla.'
+	ELSE
+		PRINT 'Se produjo un error durante la inserción.'
+END CATCH
+
+EXEC sp_inserta_rubro 100, 'PERRO'
+
+select max(rubro) FROM rubros 
+
+DELETE rubros FROM rubros where rubro = 100
+		

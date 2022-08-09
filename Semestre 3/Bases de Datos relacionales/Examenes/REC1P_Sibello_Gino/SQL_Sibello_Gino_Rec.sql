@@ -34,3 +34,41 @@ group by
 	s.denominacion
 HAVING
 	sum(vc.total) > 1000000
+-- Actividad 3
+BEGIN TRANSACTION 
+	UPDATE rubros
+		SET nombre = 'VINCHAS'
+		WHERE rubro = 52
+	INSERT INTO rubros (rubro,nombre)
+		VALUES (99,'SKATERS')
+	IF @@ERROR = 0
+		COMMIT TRANSACTION
+	ELSE
+		ROLLBACK TRANSACTION
+END 
+
+--ACTIVIDAD 4
+ALTER PROCEDURE sp_inserta_sucursal
+	@codigo int,
+	@denominacion char(30),
+	@direccion char(30)
+AS
+BEGIN TRY
+	BEGIN TRANSACTION 
+		INSERT INTO sucursales (sucursal,denominacion,direccion,Activa)
+			VALUES (@codigo,@denominacion,@direccion,'N')
+		COMMIT TRANSACTION
+		PRINT 'La Nueva Sucursal '+ ltrim(rtrim(@denominacion)) + ' fue dada de alta correctamente'
+END TRY
+BEGIN CATCH 
+	if ERROR_NUMBER() = 2627
+		PRINT 'La Sucursal ' + ltrim(rtrim(@denominacion)) + ' ya existe.'
+	ELSE
+		PRINT 'Hubo un problema! No se pudo insertar la Sucursal.'
+END CATCH
+-- Para saber cual es la sucursal mas alta
+select max(sucursal) from sucursales
+-- Ejecuto una instruccion
+EXEC sp_inserta_sucursal 101, 'PARQUE BELGRANO', 'PARQUE BELGRANO MANZANA I' 
+-- Elimino la sucursal que agrege
+delete sucursales where sucursal = 101

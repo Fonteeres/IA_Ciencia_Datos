@@ -166,39 +166,7 @@ En todos los casos verifique la correcta inserción de las filas mediante instruc
 
 -- a)
 
-SELECT
-	articulo,
-	nombre,
-	preciomayor,
-	preciomenor
-INTO
-	accesorios
-FROM
-	articulos
-WHERE
-	rubro IN (76,85,77,97,70,72,87,88)
 
--- b)
-
-INSERT INTO accesorios
-SELECT
-	articulo,
-	nombre,
-	preciomayor,
-	preciomenor
-FROM
-	articulos
-WHERE
-	rubro = 89
-
--- c)
-
-INSERT INTO accesorios
-	(articulo,nombre,preciomayor,preciomenor)
-VALUES
-	('E000000001','ELEMENTO ACCESORIO',15,23.50)
-
-SELECT * FROM accesorios -- VERIFICACIÓN
 
 /*
 
@@ -213,24 +181,6 @@ aquellos artículos en los que el PRECIOMENOR sea menor o igual al PRECIOMAYOR.
 
 -- a)
 
-UPDATE
-	accesorios
-SET
-	preciomayor = 0
-WHERE
-	preciomayor < 0
-
--- b)
-
-UPDATE
-	accesorios
-SET
-	preciomenor = preciomayor * 1.10
-WHERE
-	preciomenor <= preciomayor
-
-SELECT * FROM accesorios -- VERIFICACIÓN
-
 /*
 
 EJERCICIO 3: ELIMINACION DE FILAS
@@ -243,12 +193,5 @@ b) Elimine la tabla ACCESORIOS.
 
 -- a)
 
-DELETE 
-	accesorios
-WHERE
-	nombre LIKE '%OUTLET%'
-	OR (preciomayor = 0 AND preciomenor = 0)
-
 -- b)
 
-DROP TABLE accesorios

@@ -39,8 +39,7 @@ SELECT
 	AVG(mc.total) AS "Venta Promedio"
 FROM
 	mayorcab AS mc
-	INNER JOIN clientes AS c
-	ON mc.cliente = c.cliente
+	INNER JOIN clientes AS c ON mc.cliente = c.cliente
 WHERE
 	mc.anulada = 0
 GROUP BY
@@ -100,7 +99,7 @@ GROUP BY -- Establece los criterios de agrupamiento
 HAVING
 	SUM(total) < 1000000
 --
-UNION ALL
+UNION ALL -- UNION ALL si hay datos duplicados los repite
 --
 SELECT
 	'Mayorista' AS "Tipo Venta",
