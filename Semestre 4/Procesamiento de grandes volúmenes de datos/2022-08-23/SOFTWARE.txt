@@ -1,0 +1,22 @@
+
+WINDOWS 10
+CMD
+UBUNTU 18-04 -- ver de instalar para tener ambos en la notebook
+BASH SHELL
+VIRTUAL BOX
+VMWARE WORKSTATION PLAYER
+DOCKER
+GIT
+PYTHON 
+MONGODB -- Importante
+PYMONGO -- paquete
+NEO4J
+VISUAL STUDIO CODE
+ANACONDA NOTEBOOKS -- No gracias
+JDK -- Java development kit archivo .plus
+NETBEANS
+APACHE HADOOP -- Importante
+APACHE SPARK -- Importante
+PYSPARK -- paquete 
+
+REPLIT.COM
