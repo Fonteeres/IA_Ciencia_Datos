@@ -1,0 +1,20 @@
+Solo 2 Trabajos Practicos 
+Temas aparte:
+    Series de tiempo en IA(Tema a ver aparte) -univariante -multivariante
+Posibles Trabajos Practicos:
+    -keystroke Dynamics:
+        Generar los datos
+        Analizar: Analisis exploratorio de datos (EDA)
+        Data Set
+        Modelo
+        Programa de Produccion.
+        (Usos biblioteca 't.kinter')
+        (Flasq-Web)
+        Analisis Final.
+    -Chat Bot: 
+        Temas del IES
+        Interaccion: Libre.
+        Palabras Claves-features-Variables
+        -Maldicion de la dimensionalidad.
+    -Pronosticar Deuda
+     
