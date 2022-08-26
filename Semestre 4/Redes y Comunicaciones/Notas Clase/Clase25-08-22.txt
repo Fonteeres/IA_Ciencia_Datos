@@ -1,0 +1,6 @@
+Temas:
+    capas osi?
+    calcular ip y subred 
+    armar servidores , seguridad
+    diagramas de red
+    
