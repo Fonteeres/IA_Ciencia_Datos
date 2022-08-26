@@ -3,4 +3,10 @@ Temas:
     calcular ip y subred 
     armar servidores , seguridad
     diagramas de red
-    
+    Mac address
+    mascara de red
+    DNS
+    TCP
+    ping '' -t (infinito)
+    tracert (Saber la ruta que hace hasta el servidor que buscas)
+    LEER SP1
