@@ -5,3 +5,4 @@ https://drive.google.com/drive/folders/1Bfl6_Y8GJc74VQqAC4wn4so0inGGxyDc
 Usar codigo asci para ver teclas
 tiempo entre teclas 2 o 3 o mas 
 buscar outliers
+ct:pp2keystroke
