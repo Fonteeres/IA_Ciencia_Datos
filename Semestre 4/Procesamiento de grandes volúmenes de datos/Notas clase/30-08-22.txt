@@ -1,0 +1,25 @@
+verificar si docker esta funcionando
+Comandos Docker: 
+
+docker -v : veo la version de docker
+docker images: veo las imagenes que hay y asi corroboro que se esta corriendo el docker
+docker pull: Trae una imagen que queres 
+docker run: se fija si esta la imagen y si no esta la trae y crea un contenedor con la misma CREA!
+docker ps: te muestra si hay un contenedor en ejecucion en el momento
+docker rm: elimina el contenedor que lo podes borrar con el ID o el nombre al azar
+docker rmi: elimina imagenes con el id o el nombre
+docker -it: itereas un contenedor
+dokcer --name: le das un nombre al contenedo
+docker star: arranca un contenedor
+docker stop: detiene un contenedor
+docker exec -it : ejecuta el contenedor itinerandolo
+
+
+Comandos de linux:
+
+virtualizacion
+hyper-v
+windows subsistem linux
+instalar docker
+
+devdocs - Documentacion de cualquier lenguaje

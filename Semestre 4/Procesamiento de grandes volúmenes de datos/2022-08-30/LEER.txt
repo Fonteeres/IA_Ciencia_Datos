@@ -1,0 +1,125 @@
+
+TEMARIO UNIDAD 2
+----------------
+
+* SET DE DATOS
+* LOCALMENTE, PYTHON, VS CODE, NOTEBOOKS ANACONDA
+* NUBE, REPLIT.COM
+* GIT Y GITHUB
+* BASH SHELL
+* VIRTUALIZACION, VIRTUALBOX, VMWARE WORKSTATION PLAYER
+* CONTENEDORES E IMAGENES, DOCKER
+
+LINKS
+-----
+https://www.mockaroo.com/
+https://replit.com/
+https://devdocs.io/
+https://www.docker.com/
+https://hub.docker.com/
+
+------
+DOCKER
+------
+
+
+VERIFICAR INSTALACION
+---------------------
+docker --version
+
+DOCKER DESKTOP
+--------------
+ARRANCAR SERVICIO
+
+DESCARGAR IMAGEN DEL HUB DE DOCKER
+----------------------------------
+docker pull hello-world
+
+EJECUTAR UN CONTENEDOR
+----------------------
+docker run hello-world
+docker run --name hola-mundo hello-world
+
+CAMBIAR NOMBRE A CONTENEDOR
+---------------------------
+docker rename hola-mundo hola-miguel
+
+VER IMAGENES DISPONIBLES EN EL EQUIPO
+-------------------------------------
+docker images
+
+ELIMINAR CONTENEDORES
+---------------------
+docker rm container_name
+docker rm container_⁯id
+
+ELIMINAR IMAGENES
+-----------------
+docker rmi image_name
+docker rmi image_id
+
+VER CONTENEDORES EN EJECUCION
+-----------------------------
+docker ps
+
+VER CONTENEDORES EN EJECUCION Y QUE FUERON EJECUTADOS
+-----------------------------------------------------
+docker ps -a
+
+CONTENEDOR DOCKER UBUNTU:18.04
+------------------------------
+docker run -it --name con-ubuntu ubuntu:18.04
+docker start con-ubuntu
+docker stop con-ubuntu
+docker exec -it con-ubuntu bash
+
+ACTUALIZAR PAQUETES E INSTALAR NANO
+-----------------------------------
+apt update
+apt install nano
+
+CONTENEDOR DOCKER NGINX
+-----------------------
+docker run --name con-nginx -d -p 8080:80 nginx	
+docker exec -it con-nginx bash
+
+RAIZ DE NGINX
+-------------
+/usr/share/nginx/html
+
+CONTENEDOR DOCKER CON MYSQL
+---------------------------
+	CONTENEDOR SIN PERSISTENCIA DE DATOS
+	docker run -d --rm --name con-mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 mysql:5.7.22
+
+	ACCEDER AL CONTENEDOR
+	docker exec -it con-mysql mysql -p
+	
+	show databases;
+	create database empresa;
+	use empresa;
+	show tables;
+	create tabla usuarios (
+		dni int(8) primary key,
+		nombre varchar(50)
+	);
+	describe usuarios;
+	insert into usuarios values(101, 'ANA');
+	insert into usuarios values(102, 'PEDRO');
+	select * from usuarios;
+
+	ARRANCAR Y DETENER CONTENEDOR
+	docker start con-mysql
+	docker stop con-mysql
+	
+	CONTENEDOR CON PERSISTENCIA DE DATOS
+	IMAGEN img_41
+
+	BIND MOUNT
+	docker run -d --rm --name con-mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -v c:/Users/mec/data:/var/lib/mysql mysql:5.7.22
+	
+	VOLUME
+	docker run -d -p 3306:3306 --name con-mysql  -e MYSQL_ROOT_PASSWORD=root --mount src=volume-mysql,dst=/var/lib/mysql mysql:5.7.22
+	docker volume ls
+	docker volume prune
+

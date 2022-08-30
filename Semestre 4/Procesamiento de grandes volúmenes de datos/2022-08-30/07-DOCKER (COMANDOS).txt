@@ -1,0 +1,118 @@
+
+---------------
+DOCKER COMANDOS
+---------------
+
+
+TESTEAR INSTALACION
+-------------------
+
+docker version
+
+
+DESCARGAR IMAGEN
+----------------
+docker pull hello-world
+
+
+DESCARGAR Y EJECUTAR UNA IMAGEN
+-------------------------------
+
+docker run hello-world
+
+
+LINK IMAGENES
+-------------
+https://hub.docker.com/
+
+VER IMAGENES
+------------
+
+docker images
+
+BUSCAR UNA IMAGEN ubuntu
+------------------------
+docker search ubuntu
+
+INSTALAR IMAGEN ubuntu
+----------------------
+docker pull ubuntu
+
+EJECUTAR IMAGEN ubuntu
+----------------------
+docker run ubuntu
+docker run ubuntu echo 'hello world'
+docker run -it ubuntu bash
+
+ls
+echo 'hello world'
+touch index.txt
+ls
+cat index.txt
+ctrl-d
+
+
+VER CONTENEDORES EJECUCION
+--------------------------
+docker ps
+
+COMANDOS docker
+---------------
+docker ps
+docker ps -a
+docker ps -aq
+
+
+docker rm container_id
+docker rm container_name
+
+docker start container_id
+docker start container_name
+
+docker stop container_id
+docker stop container_name
+
+
+OTRO EJEMPLO
+------------
+docker pull nginx
+docker run -p 3000:80 nginx
+docker run -p 80:80 -d nginx
+docker run -p 80:80 -p 3000:80 -p 4000:80 -d nginx
+
+
+
+ELIMINAR TODOS LOS CONTENEDORES
+-------------------------------
+docker rm $(docker ps -aq)
+docker rm $(docker ps -aq) -f
+ 
+
+PARAR TODOS LOS CONTENEDORES
+----------------------------
+docker stop $(docker ps -aq)
+
+
+INSTALAR LA IMAGEN DE APACHE
+----------------------------
+
+docker run -p 80:80 -d httpd
+
+
+
+INSTALAR LA IMAGEN DE MYSQL
+---------------------------
+
+docker run -d -p 3307:3306 --name mydatabase mysql
+docker run -d -p 3307:3306 --name mydatabase -e MYSQL_ROOT_PASSWORD=contraseña mysql
+
+
+ELIMINAR UNA IMAGEN
+-------------------
+docker rmi mysql
+docker rmi image_id
+
+
+
+
+

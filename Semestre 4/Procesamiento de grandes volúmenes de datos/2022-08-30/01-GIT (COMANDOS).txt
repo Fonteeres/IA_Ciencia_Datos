@@ -1,0 +1,48 @@
+
+
+CONFIGURAR
+----------
+git --version
+
+git config --global user.name "nombre_usuario"
+git config --global user.email "email_usuario"
+
+git config -–global -l 
+
+
+PRIMER COMMIT
+-------------
+
+git init
+git add .
+git commit -m "primer commit"
+git remote add origin https://github.com/miguelcarrizo-ies21/website1.git
+git push -u origin master
+
+
+SEGUNDO COMMIT
+--------------
+
+git add .
+git commit -m "segundo commit"
+git push -u origin master
+
+
+CAMBIAR DE RAMA
+---------------
+git branch -M gh-pages
+git push -u origin gh-pages
+
+
+DESCARGAR 
+---------
+https://github.com/miguelcarrizo-ies21/website1
+
+
+VISUALIZACION
+-------------
+https://miguelcarrizo-ies21.github.io/website1/
+
+
+
+
