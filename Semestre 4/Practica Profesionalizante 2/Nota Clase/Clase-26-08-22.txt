@@ -6,3 +6,4 @@ Usar codigo asci para ver teclas
 tiempo entre teclas 2 o 3 o mas 
 buscar outliers
 ct:pp2keystroke
+Fecha entrega: 30/09/2022
