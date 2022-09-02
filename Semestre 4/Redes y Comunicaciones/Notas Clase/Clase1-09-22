@@ -1,0 +1,74 @@
+PRIMEROS PASOS EN LINUX
+{ hay cosas que están descriptas, hay cosas que deben buscar... }
+
+Accedemos a la consola del sistema operativo
+
+1. ¿qué usuario está activo?
+
+[root]# una línea que comienza con el prompt "[root]#" significa que ha  
+estado transcrita como administrador de sistema de la máquina. 
+
+[campeonIES]$ este prompt, que finaliza con el carácter "$", significa que el  
+comando ha estado introducido bajo la identidad del usuario "campeonIES".
+
+2. ¿cómo crear usuario?
+$ sudo adduser capoIES
+$ cat /etc/passwd | grep capoIES
+$ cat /etc/group | grep capoIES
+$ sudo passwd capoIES
+
+3. Para crear una carpeta personal con permisos de lectura, escritura y ejecución para el usuario, escritura y ejecución para el grupo y sin permisos para el resto de usuarios, ejecutaremos el siguiente comando:
+$ sudo mkdir -m 750 /home/capoIES
+
+4. Para asignar el usuario y grupo capoIES al directorio, ejecutaremos el siguiente comando:
+$ sudo chown capoIES:capoIES /home/capoIES/
+
+5. Creamos en la carpeta actual, un archivo (ejemplo: nano miarchivoloco.ies)
+ls -l 
+¿Qué vemos?
+
+6.
+ls -l [nombre del archivo]
+¿Qué vemos?
+ls -l /usr 
+
+7. 
+chmod 744 [nombre del archivo]
+¿por qué 744, qué significa, existen más conf?
+
+8. 
+chown elProfe miarchivoloco.ies
+¿qué hace este comando?
+
+9. 
+Los comandos who y finger ¿qué hacen?
+
+10.
+Los comandos id y groups ¿qué hacen?
+
+11.
+ps --help ¿cuál es su utilidad?
+
+Ifconfig
+ifconfig (interface configurator) es uno de los comandos más usados a diario por los administradores de red o personal de soporte ya que gracias a ella podemos conocer detalles específicos de la red y realizar tareas como:
+Conocer la dirección IP del equipo.
+Ver el nombre del interfaz.
+Conocer la dirección MAC del adaptador red.
+Habilitar o deshabilitar la interfaz de red.
+Conocer el tamaño MTU (unidad de transmisión máxima).
+Analizar los errores de red y más.
+
+Con ifconfig podemos ejecutar las siguientes opciones para tareas específicas:
+
+Asignar una dirección IP:
+ifconfig eth0 192.168.0.2 netmask 255.255.255.0
+Habilitar una interfaz de red:
+ifup eth0
+Deshabilitar una interfaz de red:
+ifdown eth0
+Modificar el MTU:
+ifconfig eth0 mtu XX
+Establecer la interfaz en modo promiscuo:
+ifconfig eth0 – promisc
+
+https://www.hostgator.mx/blog/comandos-basicos-linux/#comandos-basicos-de-linux
