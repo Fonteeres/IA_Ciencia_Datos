@@ -1,0 +1,83 @@
+
+LINK
+----
+https://migueldoctor.medium.com/run-mysql-phpmyadmin-locally-in-3-steps-using-docker-74eb735fa1fc
+https://maximorlov.com/install-mysql-with-phpmyadmin-using-docker/
+
+UBUNTU (DOCKER)
+------
+docker run -it --name miguel-ubuntu ubuntu:18.04
+docker start miguel-ubuntu
+docker stop miguel-ubuntu
+docker exec -it miguel-ubuntu bash
+
+NGINX (DOCKER)
+-----
+docker run --name miguel-nginx -d -p 8080:80 nginx	
+docker exec -it miguel-nginx bash
+docker cp index.html miguel-nginx:/usr/share/nginx/html
+
+MYSQL (DOCKER)
+-----
+docker run --name miguel-mysql -e MYSQL_ROOT_PASSWORD=1234 -d mysql
+docker exec -it miguel-mysql bash
+
+mysql --user root --password
+docker stop miguel-mysql
+docker start miguel-mysql
+
+show databases;
+create database ies21;
+use ies21;
+show tables;
+create table usuarios (
+	idusuario int(8) NOT NULL AUTO_INCREMENT,
+	nombre varchar(50),
+	email varchar(50),
+	PRIMARY KEY (idusuario)
+);
+describe usuarios;
+insert into usuarios(nombre, email) values('ANA', 'ana@gmail.com');
+insert into usuarios(nombre, email) values('PEDRO', 'pedro@hotmail.com');
+insert into usuarios(nombre, email) values('PAOLA', 'paola@gmail.com');
+select * from usuarios;
+
+
+MONGODB (DOCKER)
+-------
+docker run -d -p 27017:27017 --name miguel-mongo -e MONGO_INITDB_ROOT_USERNAME=mec -e MONGO_INITDB_ROOT_PASSWORD=mec mongo
+docker exec -it miguel-mongo bin/bash
+docker start miguel-mongo
+docker stop miguel-mongo
+
+MONGODB (SHELL)
+---------------
+mongo admin -u mec -password
+
+use store
+db.products.insert({name:'laptop'})
+show dbs
+show collections
+db.products.find({})
+exit
+
+
+MONGODB (PYTHON)
+----------------
+
+from pymongo import MongoClient
+MONGO_URI = 'mongodb://localhost:27017'
+client = MongoClient(MONGO_URI)
+db = client['empresa']
+productos = db['productos']
+results = productos.find({})
+
+doc = {
+    "idproducto":"101",
+    "nombre":"TECLADO"
+}
+
+productos.insert_one(dato)
+
+for item in results:
+    print(item['nombre'])

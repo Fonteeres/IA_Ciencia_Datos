@@ -1,0 +1,5 @@
+Vimos como usar docker con varias imagenes, Como ngnix, mongodb y mysql
+aprendimos a copiar archivos del sistema operativo host a el contenedor de docker
+aprendimos los comanods basicos para abrir un servidor nginx en el puerto que uno desea
+aprendimos los comandos basicos de mongodb y nos mostro de donde sacar la documetnacion para
+mongo db
