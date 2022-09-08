@@ -1,0 +1,17 @@
+Minusculizacion 
+    PALABRA -> palabra > llevar a minuscula todo aquello
+    pAlAbrA -> palabra > que no sea un caracter especial / numero
+
+    A[a··,a·] A[2a] 
+
+    Frecuencia absoluta = Cantidad de palabra
+    Frecuencia relativa = Cantidad de palabra / Cantidad de palabras
+
+    Frecuencia de termino / inversa Frecuencia documentos   
+    tf/idf buscar en google
+
+    steming lematizacion lemataicing
+
+    nltk lemataizer (natural lenguaje tool kit)
+    nltk.org
+    spacy.download
