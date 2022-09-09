@@ -1,0 +1,13 @@
+Red Informatica
+    |host - cableado        -hub   |
+    |server radio frecuencia- modem|
+    |                       -switch|
+    |                       -router|
+
+    servers
+        http/https - Web
+            FTP    - archivos
+
+nic.ar ni idea
+modelo osi
+dato / informacion
