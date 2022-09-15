@@ -1,0 +1,22 @@
+estandarizacion de comunicaion 
+smtp - protocolo de Mail
+telnet - protocolo de comunicacion entre equipos
+¿-informaciones que se envian entre equipo-?
+ver https://www.draw.io/index.html
+Cable de red directo y cruzado
+isp: internet service provider
+simetrico - asimetrico
+enlace dedicado - compartido
+Cableado: ethernet UTP - bobina de calbe utp - Maximo de distancia de 100 mts
+        Calbe ficha y heramientas
+
+armar red local de 50 equipos de escritorios
+¿que dispositivos interconectan los equipos?
+    switch o router
+¿cuanto cable vamos a necesitar en metros 
+Capas OSI:
+    Capa fisica:
+        -Cableado
+        -dispositivos:
+            palca de red
+            router/switch
