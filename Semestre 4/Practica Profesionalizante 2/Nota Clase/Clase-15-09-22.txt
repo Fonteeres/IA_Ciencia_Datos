@@ -1,0 +1,6 @@
+eliminar comas numeros y puntos
+eliminar modo 2 de todos los datos
+sacar cual teclas es en base a el codigo ascii
+crear el conjunto de teclas que son apretadas  'ES'
+determinar cuales son los outliers en tiempos 
+eliminar conuntos que tengan menor cantidad de tiempo 
