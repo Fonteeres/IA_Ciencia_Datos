@@ -1,0 +1,124 @@
+
+DESCARGAR IMAGEN UBUNTU
+-----------------------
+docker pull ubuntu:18.04
+
+CREAR CONTENEDOR UBUNTU
+-----------------------
+docker run -it --name miguel-ubuntu ubuntu:18.04
+
+DESCARGAR IMAGEN MONGO
+----------------------
+docker pull mongo
+
+CREAR CONTENEDOR MONGO
+----------------------
+docker run -d -p 27099:27017 --name miguel-mongo mongo
+
+VER CONTENEDORES ACTIVOS
+------------------------
+docker ps
+
+VER CONTENEDORES ACTIVOS Y NO ACTIVOS
+-------------------------------------
+docker ps -a
+
+DETENER CONTENEDOR
+------------------
+docker stop miguel-mongo
+
+ARRANCAR CONTENEDOR
+-------------------
+docker start miguel-mongo
+
+INGRESAR AL SHELL DEL CONTENEDOR
+--------------------------------
+docker exec -it miguel-mongo bin/bash
+
+EJECUTAR EL CLIENTE MONGO
+-------------------------
+mongosh
+
+MOSTRAR BASES DE DATOS
+----------------------
+show databases
+
+ACTIVAR LA BASE DE DATOS empresa
+--------------------------------
+use empresa
+
+INSERTAR UN DOCUMENTO CON EL NOMBRE DE UN PRODUCTO Y SU STOCK 
+-------------------------------------------------------------
+BD empresa
+COLECCION productos
+
+db.productos.insert({nombre: 'TECLADO', stock: 100})
+
+VER COLECCION productos
+-----------------------
+db.productos.find({})
+
+INSERTAR MAS DE UN DOCUMENTO
+----------------------------
+db.productos.insert([{nombre: 'MOUSE', stock: 200}, {nombre: 'MONITOR', stock: 150}, {nombre: 'PEN DRIVE', stock:100}])
+
+CREAR LA COLECCION usuarios
+---------------------------
+db.createCollection('usuarios')
+
+VER COLECCIONES
+---------------
+show collections
+
+TODOS LOS DOCUMENTOS CON stock = 100
+------------------------------------
+db.productos.find({stock: 100})
+
+MOSTRAR SOLO COLUMNAS nombre y stock
+------------------------------------
+db.productos.find({stock: 100}, {_id:0, nombre:1, stock:1})
+
+MOSTRAR DOCUMENTOS CON stock > 100
+----------------------------------
+db.productos.find({stock: {$gt: 100}})
+
+ELIMINAR UN DOCUMENTO
+---------------------
+db.productos.deleteOne({nombre: 'XXX'})
+db.productos.deleteMany({nombre: 'XXX'})
+
+MODIFICAR EL STOCK DE UN PRODUCTO
+----------------------------------
+db.productos.updateOne({nombre:'MONITOR'}, {$set: {stock: 123}})
+db.productos.updateMany({nombre:'MONITOR'}, {$set: {stock: 123}})
+
+BORRAR UNA COLECCION
+--------------------
+db.usuarios.drop()
+
+BORRAR UNA BASE DE DATOS
+------------------------
+db.dropDatabase()
+
+
+CONSUMIR API CON PYTHON
+-----------------------
+import requests
+
+def getPaises():
+    URL = 'https://api.mercadolibre.com/classified_locations/countries'
+    response = requests.get(URL)
+    filas = response.json()
+    for fila in filas:
+        print('id: {} - name: {}'.format(fila['id'], fila['name']))
+
+   
+getPaises()
+
+
+IMPORTAR JSON
+-------------
+mongoimport --db empresa --collection productos --file /home/data/productos.json --jsonArray
+
+
+
