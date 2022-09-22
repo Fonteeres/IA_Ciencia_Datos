@@ -1,0 +1,167 @@
+
+-------
+MONGODB
+-------
+
+LINK
+----
+https://www.mongodb.com/
+https://robomongo.org/
+https://www.mockaroo.com/
+
+
+CONFIGURACION
+-------------
+C:\data\db
+
+SOFTWARE
+--------
+MONGODB ATLAS
+MONGODB COMMUNITY SERVER
+MONGODB COMPASS
+
+CONSOLA
+-------
+mongod (EL SERVICIO DE LA BASE DE DATOS)(puerto 27017)
+mongo (SHELL DE MONGO, INTERPRETE DE JAVASCRIPT)
+
+CONCEPTOS BASICOS
+-----------------
+BASE DE DATOS
+COLECCIONES
+DOCUMENTOS (OBJECTOS JSON)
+
+
+IMPORTAR JSON
+-------------
+mongoimport --db empresa --collection productos --file /home/data/productos.json --jsonArray
+
+
+COMANDOS
+--------
+11+12
+Math.sin(Math.PI / 2)
+new Date()
+function factorial(n) { if(n<=1) return 1; return n * factorial(n-1) }
+db (test)
+show dbs (admin, config, local)
+
+help
+db.help()
+use midb
+db.products.insert({"name": "laptop"})
+show collections
+db.dropDatabase()
+db.createCollection("users")
+db.users.drop()
+db.products.insert({"nombre": "laptop", "precio": 123.45})
+db.products.find()
+db.products.find().pretty()
+
+db.products.insert([
+	{
+		"name": "mouse",
+		"description": "razer mouse",
+		"tags": ["computers", "gaming"],
+		"quantity": 14,
+		"create_at": new Date()
+
+	},
+	{
+		"name": "monitor",
+		"description": "lg monitorer mouse",
+		"tags": ["computers", "gaming"],
+		"quantity": 3,
+		"create_at": new Date()
+
+	}
+])
+
+db.products.find({"name": "mouse"})
+db.products.find({"tags": "computers"})
+db.products.find({"tags": "computers", "name": "monitor"})
+db.products.findOne({"tags": "computers"})
+db.products.findOne({"tags": "computers"}, {"name": 1, "description": 1})
+db.products.findOne({"tags": "computers"}, {"name": 1, "description": 1, "_id": 0})
+db.products.find({"tags": "computers"}).sort({"name": 1})
+db.products.find().limit(2)
+db.products.count()
+db.products.find().forEach(product => print("Product Name: " + product.name))
+
+db.products.update({"name": "keyboard"}, {"price": 99.99})
+db.products.update({"name": "laptop"}, {$set: {"description": "lg gram laptop"}})
+db.products.update({"name": "desktop"}, {$set: {"description": "Gaming Desktop"}}, {upsert: true})
+db.products.update({"name": "keyboard"}, {$inc: {"price": 0.01}})
+db.products.update({"name": "laptop"}, {$rename: {"name": "nombre"}})
+
+db.products.remove({"nombre": "keyboard"})
+db.products.remove({})
+
+
+RECORDAR MONGODB COMPASS
+------------------------
+POSEE UNA INTERFAZ GRAFICA PARA REALIZAR OPERACIONES
+
+RECORDAR MONGODB ATLAS
+----------------------
+SERVICIO EN LA NUBE
+
+-------
+PYMONGO
+-------
+pip install pymongo
+crear archivo app.py
+
+from pymongo import MongoClient
+MONGO_URI = 'mongodb://localhost:27017'
+client = MongoClient(MONGO_URI)
+db = client['teststore']
+collection = db['products']
+
+collection.insert_one({"name": "keyboard", "price": 300})
+collection.insert_one({"_id": 2, "name": "keyboard", "price": 300})
+
+product_one = {"name": "mouse"}
+product_two = {"name": "monitor"}
+
+collection.insert_many([product_one, product_two])
+
+results = collection.find()
+print(results)
+
+for r in results:
+	print(r)
+
+for r in results:
+	print(r['name'])
+
+results = collection.find({"price": 300})
+for r in results:
+	print(r)
+
+results = collection.find({"name": "keyboard"})
+for r in results:
+	print(r)
+
+result = collection.find_one({"name": "keyboard"})
+print(result)
+
+collection.delete_many({"price": 300})
+collection.delete_one({"name": "monitor"})
+collection.delete_many({})
+
+collection.insert_one({"name": "laptop"})
+collection.update_one({"name": "laptop"}, {$set: {"name": "keyboard", "price": 300}})
+collection.update_one({"name": "laptop"}, {$inc: {"price": 30}})
+
+number_of_products = collection.count_documents({})
+print(number_of_products)
+
+
+EJECUCION
+---------
+python app.py
+
+
+
+

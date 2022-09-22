@@ -1,0 +1,16 @@
+Parcial unidades: 1,2,3
+Hoy:
+usar python para utilizar mongo
+como averiguar puertos libres wn windows y linux? {}
+vimos los comandos de docker
+    ver si esta corriendo
+    ver cuales imagens tenes
+    ver cuales son los contenedores activos 
+    ver cuales son los contenedores que estuverion activos 
+    correr un contendro
+    entrar en uno para correr el bash
+vimos los comandos de linux 
+vimos los comandos de mongo
+vimo como conectar a una base de datos mongo con pythons
+
+pymongo
