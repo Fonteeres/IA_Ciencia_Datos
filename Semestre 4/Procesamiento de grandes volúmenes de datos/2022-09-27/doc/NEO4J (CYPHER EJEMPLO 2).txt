@@ -1,0 +1,208 @@
+
+---------------
+EJERCICIO NEO4J
+---------------
+
+PERSONAS
+--------
+NOMBRE		EDAD
+ISABELA		10
+JEREMIAS	16
+KATA		25
+PEDRO		21
+ROSA		33
+
+COMIDAS
+-------
+NOMBRE		CALORIAS
+TALLARINES	110
+MILANESAS	75
+EMPANADAS	130
+HAMBURGUESAS	87
+LOMITOS		123
+TARTAS		94
+
+AUTOS
+-----
+MODELO
+TOYOTA
+FORD
+
+RELACIONES ENTER PERSONAS Y COMIDAS
+-----------------------------------
+ISABELA LE GUSTA TALLARINES, EMPANADAS Y LOMITOS
+JEREMIAS LE GUSTA MILANESAS, HAMBURGUESAS Y TARTAS
+KATA LE GUSTA TALLARINES Y LOMITOS
+PEDRO LE GUSTA MILANESAS Y TARTAS
+ROSA LE GUSTA LOMITOS
+
+RELACIONES ENTRE PERSONAS
+-------------------------
+ISABELA ES AMIGO DE KATA Y ROSA
+KATA ES AMIGO DE ISABELA
+ROSA ES AMIGO DE ISABELA
+JEREMIAS ES AMIGO DE ROSA
+ROSA ES AMIGO DE JEREMIAS
+
+RELACIONES ENTRES PERSONAS Y AUTOS
+----------------------------------
+ISABELA ES PROPIETARIO DE UN TOYOTA DESDE EL AÑO 2020
+ISABELA ES PROPIETARIO DE UN FORD DESDE EL AÑO 2019
+KATA ES PROPIETARIO DE UN FORD DESDE AÑO 2019
+
+
+EL PROBLEMA
+-----------
+01. OBTENER TODAS LAS PERSONAS
+02. OBTENER EL NOMBRE DE TODAS LAS PERSONAS
+03. OBTENER TODOS LOS NODOS
+04. OBTENER TODAS LAS COMIDAS DE MAS DE 100 CALORIAS
+05. OBTENER EL NOMBRE DE TODAS LAS PERSONAS DE CUYA EDAD SEA MAYOR A 20
+06. OBTENER EL NOMBRE DE TODOS LOS AMIGOS DE ISABELA
+07. OBTENER QUE AUTOS TIENE ISABELA
+08. OBTENER A CUANTAS PERSONAS LE GUSTAN LOS LOMITOS
+
+LA SOLUCION
+-----------
+
+CREAR NODOS PERSONAS
+--------------------
+CREATE (:Persona {nombre: 'ISABELA', edad:10})
+CREATE (:Persona {nombre: 'JEREMIAS', edad:16})
+CREATE (:Persona {nombre: 'KATA', edad:25})
+CREATE (:Persona {nombre: 'PEDRO', edad:21})
+CREATE (:Persona {nombre: 'ROSA', edad:33})
+
+VER TODOS LOS NODOS
+-------------------
+MATCH(n) RETURN n
+
+CREAR NODOS COMIDAS
+-------------------
+CREATE (:Comida {nombre: 'TALLARINES', calorias:110})
+CREATE (:Comida {nombre: 'MILANESAS', calorias:75})
+CREATE (:Comida {nombre: 'EMPANADAS', calorias:130})
+CREATE (:Comida {nombre: 'HAMBURGUESAS', calorias:87})
+CREATE (:Comida {nombre: 'LOMITOS', calorias:123})
+CREATE (:Comida {nombre: 'TARTAS', calorias:94})
+
+VER NODOS COMIDAS
+-----------------
+MATCH(c:Comida) RETURN c
+
+VER NODOS PERSONAS
+------------------
+MATCH(p:Persona) RETURN p
+
+CREAR NODOS AUTOS
+-----------------
+CREATE (:Auto {modelo: 'TOYOTA'})
+CREATE (:Auto {modelo: 'FORD'})
+
+
+A ISABELA LE GUSTA LOS TALLARINES
+---------------------------------
+MATCH(p:Persona) WHERE p.nombre='ISABELA' 
+MATCH(c:Comida) WHERE c.nombre='TALLARINES' 
+CREATE (p)-[:LE_GUSTA]->(c)
+
+
+ELIMINAR TODAS LAS RELACIONES LE_GUSTA
+--------------------------------------
+MATCH (n)-[r:LE_GUSTA]->()
+DELETE r
+
+A ISABELA LE GUSTA LOS TALLARINES Y LAS EMPANADAS
+-------------------------------------------------
+MATCH(p:Persona) WHERE p.nombre='ISABELA' 
+MATCH(c:Comida) WHERE c.nombre='TALLARINES' OR c.nombre='EMPANADAS' OR c.nombre='LOMITOS'
+CREATE (p)-[:LE_GUSTA]->(c)
+
+A ISABELA NO LE GUSTA NINGUNA COMIDA
+------------------------------------
+MATCH (:Persona {nombre: 'ISABELA'})-[r:LE_GUSTA]->()
+DELETE r
+
+BUSCAR UN NODO POR SU ID
+------------------------
+MATCH (n)
+WHERE id(n)= 13
+RETURN n
+
+BUSCAR UN NODO POR SU ID Y ELIMINARLO
+-------------------------------------
+MATCH (n)
+WHERE id(n)= 13
+DELETE n
+
+A JEREMIAS LE GUSTA LAS HAMBURGUESAS, MILANESAS Y TARTAS
+--------------------------------------------------------
+MATCH(p:Persona) WHERE p.nombre='JEREMIAS' 
+MATCH(c:Comida) WHERE c.nombre IN ['MILANESAS', 'HAMBURGUESAS', 'TARTAS']
+CREATE (p)-[:LE_GUSTA]->(c)
+
+A ISABELA LE GUSTA LOS TALLARINES, EMPANADAS Y LOMITOS
+------------------------------------------------------
+MATCH(p:Persona) WHERE p.nombre='ISABELA' 
+MATCH(c:Comida) WHERE c.nombre IN ['TALLARINES', 'EMPANADAS', 'LOMITOS']
+CREATE (p)-[:LE_GUSTA]->(c)
+
+
+KATA LE GUSTA TALLARINES Y LOMITOS
+----------------------------------
+MATCH(p:Persona) WHERE p.nombre='KATA' 
+MATCH(c:Comida) WHERE c.nombre IN ['TALLARINES', 'LOMITOS']
+CREATE (p)-[:LE_GUSTA]->(c)
+
+PEDRO LE GUSTA MILANESAS Y TARTAS
+---------------------------------
+MATCH(p:Persona) WHERE p.nombre='PEDRO' 
+MATCH(c:Comida) WHERE c.nombre IN ['MILANESAS', 'TARTAS']
+CREATE (p)-[:LE_GUSTA]->(c)
+
+
+ROSA LE GUSTA LOMITOS
+---------------------
+MATCH(p:Persona) WHERE p.nombre='ROSA' 
+MATCH(c:Comida) WHERE c.nombre='LOMITOS' 
+CREATE (p)-[:LE_GUSTA]->(c)
+
+ISABELA ES PROPIETARIO DE UNA TOYOTA DESDE EL AÑO 2020
+------------------------------------------------------
+MATCH(p:Persona) WHERE p.nombre='ISABELA'
+MATCH(a:Auto) WHERE a.modelo = 'TOYOTA'
+CREATE (p)-[:ES_PROPIETARIO {desde: 2020 }]->(a)
+ 
+
+ISABELA Y KATA ES PROPIETARIO DE UN FORD DESDE EL AÑO 2019
+----------------------------------------------------------
+MATCH(p:Persona) WHERE p.nombre='ISABELA' OR p.nombre='KATA'
+MATCH(a:Auto) WHERE a.modelo = 'FORD'
+CREATE (p)-[:ES_PROPIETARIO {desde: 2019 }]->(a)
+ 
+
+QUE COMIDAS LE GUSTA A ISABELA
+------------------------------
+MATCH(p:Persona)-[r:LE_GUSTA]->(c:Comida) WHERE p.nombre='ISABELA' return c
+
+A QUE PERSONAS LE GUSTAN LOS LOMITOS
+------------------------------------
+MATCH(p:Persona)-[r:LE_GUSTA]->(c:Comida) WHERE c.nombre='LOMITOS' return p
+
+
+COMIDAS CON MAS DE 100 CALORIAS
+-------------------------------
+MATCH(c:Comida) WHERE c.calorias>100 RETURN c
+
+A CUANTAS PERSONAS LE GUSTAN LOS LOMITOS
+----------------------------------------
+MATCH(p:Persona)-[r:LE_GUSTA]->(c:Comida) WHERE c.nombre='LOMITOS' return COUNT(p) AS cantidad
+
+QUE AUTOS TIENE ISABELA
+-----------------------
+MATCH(p:Persona)-[r:ES_PROPIETARIO]->(a:Auto) WHERE p.nombre='ISABELA' return a.modelo
+
+MIGUEL ES PROFESOR DE BIG DATA
+------------------------------
+CREATE(p:Profesor {nombre:'MIGUEL'})-[r:ES_PROFESOR_DE]->(m:Materia {nombre:'BIG DATA'}) 
+

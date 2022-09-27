@@ -1,0 +1,15 @@
+neo4j - los datos son nodos- se usa cyper como lenguaje de comunicacion
+match(n) return n me devuelve todo los nodos de la base dedatos
+Crear nodos:
+    CREATE(Varaible-temporal:nombre-etiqueta{nombre: 'Juana', sexo:'F'})
+borrar todos los Nodos:
+    match(n) detach delete n
+buscar con codiciones:
+    match(variable-temporar:Etiqueta) WHERE variable-temporal.columnaDeJSON = 'Loquebuscas'
+Crear una relacion:
+    CREATE(p)-[:Le_Gusta{}]->(f)
+    donde p es una variable temporal de una condicion que realice previamente
+    le_Gusta seria el nombre de la relacion
+    los '{}' podes meter diccionarios para agregar datos a la relacion que acabas de Crear
+    y f es la variable temporal creada con un match en el cual lo creaste con una condicion.
+    

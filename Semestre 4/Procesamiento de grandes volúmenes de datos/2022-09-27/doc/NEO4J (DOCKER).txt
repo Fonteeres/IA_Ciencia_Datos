@@ -1,0 +1,19 @@
+
+--------------
+NEO4J (DOCKER)
+--------------
+
+EJEMPLO 1
+---------
+docker run --name miguel-neo4j -d --publish=7474:7474 --publish=7687:7687 neo4j
+docker exec -it miguel-neo4j bash
+cypher-shell
+match(n) return count(n);
+:exit
+
+localhost:7474
+
+EJEMPLO 2
+---------
+docker run --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data neo4j
+
