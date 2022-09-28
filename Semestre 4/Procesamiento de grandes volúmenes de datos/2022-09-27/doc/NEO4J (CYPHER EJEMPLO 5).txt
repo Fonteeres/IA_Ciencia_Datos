@@ -1,0 +1,72 @@
+CYPHER
+------
+
+MATCH(n) DETACH DELETE n
+
+
+CREATE(:persona {nombre:'JUANA', sexo:'F'})
+CREATE(:persona {nombre:'PEDRO', sexo:'M'})
+CREATE(:persona {nombre:'LUISA', sexo:'F'})
+
+
+CREATE(:fruta {nombre:'PERA'})
+CREATE(:fruta {nombre:'UVA'})
+CREATE(:fruta {nombre:'NARANJA'})
+CREATE(:fruta {nombre:'SANDIA'})
+CREATE(:fruta {nombre:'MELON'})
+
+MATCH(p:persona) WHERE p.nombre='JUANA'
+MATCH(f:fruta) WHERE f.nombre='PERA' OR f.nombre='NARANJA'
+CREATE(p)-[:LE_GUSTA]->(f)
+
+MATCH(p:persona) WHERE p.nombre='PEDRO'
+MATCH(f:fruta) WHERE f.nombre IN['PERA', 'UVA', 'SANDIA']
+CREATE(p)-[:LE_GUSTA]->(f)
+
+MATCH(p:persona) WHERE p.nombre='LUISA'
+MATCH(f:fruta) WHERE f.nombre IN['NARANJA', 'MELON']
+CREATE(p)-[:LE_GUSTA]->(f)
+
+MATCH(p:persona)-[r:LE_GUSTA]->(f:fruta) WHERE p.nombre='PEDRO' return f
+
+PYTHON
+------
+from neo4j import GraphDatabase
+
+def demo1():
+    grafo=GraphDatabase.driver(uri='bolt://localhost:7687',auth=('neo4j','1234'))
+    sesion=grafo.session()
+    q1 = 'MATCH(p:persona) RETURN p.nombre AS nombre'
+    nodos=sesion.run(q1)
+    for nodo in nodos:
+        print(nodo['nombre'])
+
+
+def demo2():
+    grafo=GraphDatabase.driver(uri='bolt://localhost:7687',auth=('neo4j','1234'))
+    sesion=grafo.session()
+    q1 = 'MATCH(n) RETURN n'
+    nodos=sesion.run(q1)
+    for nodo in nodos:
+        print(nodo)
+
+
+def demo3():
+    grafo=GraphDatabase.driver(uri='bolt://localhost:7687',auth=('neo4j','1234'))
+    sesion=grafo.session()
+    q1 = "MATCH(p:persona)-[r:LE_GUSTA]->(f:fruta) WHERE p.nombre='PEDRO' return f"
+    nodos=sesion.run(q1)
+    for nodo in nodos:
+        print(nodo)
+
+
+def demo4():
+    grafo=GraphDatabase.driver(uri='bolt://localhost:7687',auth=('neo4j','1234'))
+    sesion=grafo.session()
+    q1 = "MATCH(p:persona)-[r:LE_GUSTA]->(f:fruta) WHERE p.nombre='PEDRO' return f.nombre as nombre"
+    nodos=sesion.run(q1)
+    for nodo in nodos:
+        print(nodo['nombre'])
+
+
+

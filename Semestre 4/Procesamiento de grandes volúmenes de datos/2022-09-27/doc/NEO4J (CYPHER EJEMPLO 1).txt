@@ -1,0 +1,77 @@
+
+-------------------
+BASE DE DATOS NEO4J
+-------------------
+
+NEO4J DESKTOP
+-------------
+https://neo4j.com/
+
+DOCUMENTACION
+-------------
+https://neo4j.com/docs/
+https://neo4j.com/docs/cypher-manual/current/clauses/
+https://www.youtube.com/watch?v=RSbhmVF_ccs
+
+MODULO PYTHON
+-------------
+pip install neo4j
+
+
+MODELO
+------
+A ISABELA DE SEXO FEMENINO LE GUSTAN LAS MILANESAS Y LAS EMPANADAS
+A JEREMIAS DE SEXO MASCULINO LE GUSTAN LOS LOMITOS Y LAS HAMBURGUESAS
+
+
+CYPHER
+------
+CREATE (I:Persona {nombre:'ISABELA', sexo:'F'}) 
+CREATE (J:Persona {nombre:'JEREMIAS', sexo:'M'})
+
+CREATE (M:Comida {nombre:'MILANESAS'})
+CREATE (L:Comida {nombre:'LOMITOS'}) 
+CREATE (E:Comida {nombre:'EMPANADAS'}) 
+CREATE (H:Comida {nombre:'HAMBURGUESAS'}) 
+
+MATCH (P:Persona) WHERE P.nombre='ISABELA'
+MATCH (C:Comida) WHERE C.nombre='MILANESAS'
+CREATE (P)-[:LE_GUSTA]->(C)
+
+MATCH (P:Persona) WHERE P.nombre='ISABELA'
+MATCH (C:Comida) WHERE C.nombre='EMPANADAS'
+CREATE (P)-[:LE_GUSTA]->(C)
+
+MATCH (P:Persona) WHERE P.nombre='JEREMIAS'
+MATCH (C:Comida) WHERE C.nombre='LOMITOS'
+CREATE (P)-[:LE_GUSTA]->(C)
+
+MATCH (P:Persona) WHERE P.nombre='JEREMIAS'
+MATCH (C:Comida) WHERE C.nombre='HAMBURGUESAS'
+CREATE (P)-[:LE_GUSTA]->(C)
+
+
+VER GRAFO
+---------
+MATCH(N) RETURN(N)
+
+
+BORRAR TODOS LOS NODOS Y RELACIONES
+-----------------------------------
+MATCH (N) DETACH DELETE N
+
+DATOS CONEXION
+--------------
+:server status
+
+
+CARGAR UN CSV
+-------------
+LOAD CSV WITH HEADERS FROM 'file:/data_100.csv' AS csv
+MERGE (a:Persona {nombre: csv.full_name})
+MERGE (c:Pais {nombre: csv.country})
+CREATE (a)-[b:VIVE_EN {desde: csv.from}]->(c)
+
+RUTA DB
+-------
+file:/C:/Users/usuario/.Neo4jDesktop/neo4jDatabases/

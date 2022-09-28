@@ -1,0 +1,43 @@
+from neo4j import GraphDatabase
+
+def conexion(): 
+    grafodb=GraphDatabase.driver(uri='bolt://localhost:7687',auth=('neo4j','miguel'))
+    return grafodb
+
+def demo1(grafodb):
+    sesion=grafodb.session()
+    q1='MATCH(n) RETURN(n)'
+    nodos=sesion.run(q1)
+    for nodo in nodos:
+        print(nodo)
+
+def demo2(grafodb):
+    sesion=grafodb.session()
+    q1='MATCH(n) RETURN(n) LIMIT 2'
+    nodos=sesion.run(q1)
+    for nodo in nodos:
+        print(nodo)
+
+def demo3(grafodb):
+    sesion=grafodb.session()
+    q1='MATCH(n:Comida) RETURN(n)'
+    nodos=sesion.run(q1)
+    for nodo in nodos:
+        print(nodo)
+
+def demo4(grafodb):
+    sesion=grafodb.session()
+    q1='MATCH(n:Comida) RETURN n.nombre AS nombre, n.calorias AS calorias'
+    nodos=sesion.run(q1)
+    for nodo in nodos:
+        print('{} - {}'.format(nodo['nombre'], nodo['calorias'])) 
+
+def demo4(grafodb):
+    sesion=grafodb.session()
+    q1="MATCH(n:Persona) WHERE n.sexo='M' RETURN(n.nombre)"
+    nodos=sesion.run(q1)
+    for nodo in nodos:
+        print(nodo[0])
+
+grafodb=conexion()
+demo1(grafodb)
