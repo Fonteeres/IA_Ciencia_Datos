@@ -1,0 +1,3 @@
+Vimos que es Hadoop y su instalaciion
+sobre su ecosistema 
+pero hicimos enfasis en su intalacion 
