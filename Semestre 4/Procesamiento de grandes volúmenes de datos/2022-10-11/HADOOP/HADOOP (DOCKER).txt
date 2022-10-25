@@ -1,0 +1,115 @@
+
+-------------
+APACHE HADOOP (11-06-2022)
+-------------
+
+LINKS
+-----
+https://cjlise.github.io/hadoop-spark/Setup-Hadoop-Cluster/
+https://www.section.io/engineering-education/set-up-containerize-and-test-a-single-hadoop-cluster-using-docker-and-docker-compose/
+https://www.youtube.com/watch?v=RJdPSZZ6NsM
+https://phoenixnap.com/kb/install-hadoop-ubuntu
+https://archive.apache.org/dist/hadoop/common/
+https://www.youtube.com/watch?v=naHBgeV8K4k&list=PLu_htiBDhr8EpdB_xYvWGceFVpWGK8DkR
+
+INSTALACION
+-----------
+docker run -it --name ies-hadoop ubuntu:18.04
+apt-get update
+apt-get install openjdk-8-jdk -y
+java -version
+javac -version
+apt-get install openssh-server -y
+apt-get install openssh-client -y
+apt-get install nano
+adduser ies
+su - ies
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 0600 ~/.ssh/authorized_keys
+exit
+service ssh status
+service ssh start
+su - ies
+ssh localhost
+exit
+wget https://archive.apache.org/dist/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
+tar xvzf hadoop-3.2.1.tar.gz
+
+nano .bashrc
+#Hadoop Related Options
+export HADOOP_HOME=/home/ies/hadoop-3.2.1
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+
+source ~/.bashrc
+
+nano $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+nano $HADOOP_HOME/etc/hadoop/core-site.xml
+<configuration>
+     <property>
+         <name>fs.defaultFS</name>
+         <value>hdfs://localhost:9000</value>
+     </property>
+</configuration>
+
+nano $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+<configuration>
+     <property>
+         <name>dfs.replication</name>
+         <value>1</value>
+     </property>
+</configuration>
+
+nano $HADOOP_HOME/etc/hadoop/mapred-site.xml
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+    <property>
+        <name>mapreduce.application.classpath</name>
+        <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+    </property>
+</configuration>
+
+nano $HADOOP_HOME/etc/hadoop/yarn-site.xml
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ,HADOOP_MAPRED_HOME</value>
+    </property>
+</configuration>
+
+bin/hdfs namenode -format
+sbin/start-dfs.sh
+sbin/stop-dfs.sh
+sbin/start-yarn.sh
+sbin/stop-yarn.sh
+
+INTERFACES WEB
+--------------
+NameNode - http://localhost:9870/
+ResourceManager - http://localhost:8088/
+
+WORDCOUNT
+---------
+hdfs dfs -mkdir /entrada
+hdfs dfs -put quijote.txt /entrada
+cd /home/ies/hadoop-3.2.1/share/hadoop/mapreduce
+hadoop jar hadoop-mapreduce-examples-3.2.1.jar wordcount /entrada /salida
+hdfs dfs -cat /salida/part-r-00000
+
+
